@@ -1,16 +1,87 @@
-# React + Vite
+# 🚀 TrackIt – MERN Task Management Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TrackIt is a modern full-stack task management web application built using the **MERN Stack**. It enables users to efficiently create, organize, update, search, filter, and delete tasks through a clean, responsive, and intuitive interface.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌐 Live Demo
 
-## React Compiler
+https://track-it-rho-blush.vercel.app/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- Create Tasks
+- View All Tasks
+- Update Existing Tasks
+- Delete Tasks
+- Search Tasks
+- Filter by Status
+- Loading State
+- Toast Notifications
+- Responsive Design
+- Dynamic Updates Without Page Refresh
+- RESTful API Integration
+- MongoDB Database
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React.js
+- Tailwind CSS
+- Axios
+- React Hot Toast
+- Vite
+
+### Backend
+
+- Node.js
+- Express.js
+
+### Database
+
+- MongoDB Atlas
+- Mongoose
+
+### Deployment
+
+- Vercel
+- Render
+
+---
+
+## 🎯 Project Highlights
+
+- Modern and responsive UI
+- Clean component-based architecture
+- RESTful API implementation
+- MongoDB integration with Mongoose
+- Real-time UI updates without page refresh
+- Search and filtering functionality
+- Professional project structure
+- Production deployment using Render & Vercel
+
+---
+
+## 🚀 Future Enhancements
+
+- User Authentication
+- Dark Mode
+- Due Dates
+- Task Categories
+- Priority Levels
+- Drag & Drop Tasks
+- Dashboard Analytics
+- Calendar View
+
+---
+
+## 👩‍💻 Author
+
+- Built with ❤️ By **Ayesha Ansari**
+

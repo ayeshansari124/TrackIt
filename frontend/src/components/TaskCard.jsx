@@ -36,14 +36,14 @@ function TaskCard({ task, deleteTask, setEditingTask }) {
       <div className="flex gap-4">
         <button
           onClick={() => setEditingTask(task)}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition"
+          className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-semibold transition hover:scale-105 active:scale-95 duration-300"
         >
           ✏ Edit
         </button>
 
         <button
           onClick={() => deleteTask(task._id)}
-          className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition"
+          className="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition hover:scale-105 active:scale-95 duration-300"
         >
           🗑 Delete
         </button>

@@ -9,13 +9,18 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
   const [filter, setFilter] = useState("All");
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const fetchTasks = async () => {
     try {
+      setLoading(true);
       const res = await api.get("/tasks");
       setTasks(res.data);
     } catch {
       toast.error("Unable to fetch tasks");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,6 +50,8 @@ function App() {
   };
 
   const deleteTask = async (id) => {
+    if (!window.confirm("Delete this task?")) return;
+
     try {
       await api.delete(`/tasks/${id}`);
       toast.success("Task Deleted");
@@ -54,69 +61,87 @@ function App() {
     }
   };
 
-  const filteredTasks =
-    filter === "All" ? tasks : tasks.filter((task) => task.status === filter);
+  const filteredTasks = tasks
+    .filter((task) => (filter === "All" ? true : task.status === filter))
+    .filter((task) => task.title.toLowerCase().includes(search.toLowerCase()));
+
+  const total = tasks.length;
+  const completed = tasks.filter((t) => t.status === "Completed").length;
+  const pending = tasks.filter((t) => t.status === "Pending").length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-blue-50 to-cyan-100 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <h1 className="text-6xl font-black tracking-tight text-slate-800">
-            {" "}
-            Track It
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-blue-50 to-cyan-100 py-12 px-5">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-6xl font-black text-center text-slate-800">
+          Task Tracker
+        </h1>
 
-          <p className="text-lg text-gray-500 mt-4">
-            Organize and track your work efficiently
-          </p>
+        <p className="text-center text-gray-600 mt-3 text-lg">
+          Organize your work like a pro.
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-6 mt-10">
+          <div className="bg-white rounded-3xl shadow-xl p-6 text-center">
+            <h3 className="text-gray-500">Total Tasks</h3>
+            <h1 className="text-4xl font-bold mt-2">{total}</h1>
+          </div>
+
+          <div className="bg-yellow-100 rounded-3xl shadow-xl p-6 text-center">
+            <h3 className="text-yellow-700">Pending</h3>
+            <h1 className="text-4xl font-bold mt-2">{pending}</h1>
+          </div>
+
+          <div className="bg-green-100 rounded-3xl shadow-xl p-6 text-center">
+            <h3 className="text-green-700">Completed</h3>
+            <h1 className="text-4xl font-bold mt-2">{completed}</h1>
+          </div>
         </div>
 
-        <TaskForm
-          addTask={addTask}
-          updateTask={updateTask}
-          editingTask={editingTask}
-        />
-
-        <div className="flex justify-center gap-4 my-10 flex-wrap">
-          <button
-            onClick={() => setFilter("All")}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
-              filter === "All"
-                ? "bg-indigo-600 text-white"
-                : "bg-white shadow hover:bg-indigo-100"
-            }`}
-          >
-            All
-          </button>
-
-          <button
-            onClick={() => setFilter("Pending")}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
-              filter === "Pending"
-                ? "bg-yellow-500 text-white"
-                : "bg-white shadow hover:bg-yellow-100"
-            }`}
-          >
-            Pending
-          </button>
-
-          <button
-            onClick={() => setFilter("Completed")}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
-              filter === "Completed"
-                ? "bg-green-600 text-white"
-                : "bg-white shadow hover:bg-green-100"
-            }`}
-          >
-            Completed
-          </button>
+        <div className="my-10">
+          <TaskForm
+            addTask={addTask}
+            updateTask={updateTask}
+            editingTask={editingTask}
+          />
         </div>
 
-        <TaskList
-          tasks={filteredTasks}
-          deleteTask={deleteTask}
-          setEditingTask={setEditingTask}
-        />
+        <div className="bg-white rounded-2xl shadow-lg p-5 mb-8">
+          <input
+            type="text"
+            placeholder="🔍 Search tasks..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full border rounded-xl p-4 mb-5 outline-none focus:border-indigo-500"
+          />
+
+          <div className="flex gap-3 flex-wrap">
+            {["All", "Pending", "Completed"].map((item) => (
+              <button
+                key={item}
+                onClick={() => setFilter(item)}
+                className={`px-5 py-2 rounded-full transition font-semibold hover:scale-105 active:scale-95 duration-300${
+                  filter === item
+                    ? "bg-indigo-600 text-white"
+                    : "bg-gray-100 hover:bg-indigo-100"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="text-center py-20 text-2xl font-semibold text-gray-600">
+            ⏳ Loading Tasks...
+          </div>
+        ) : (
+          <TaskList
+            tasks={filteredTasks}
+            deleteTask={deleteTask}
+            setEditingTask={setEditingTask}
+          />
+        )}
       </div>
     </div>
   );

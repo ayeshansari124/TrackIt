@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import {toast } from 'react-hot-toast'
 function TaskForm({ addTask, updateTask, editingTask }) {
   const [form, setForm] = useState({
     title: "",
@@ -23,7 +23,7 @@ function TaskForm({ addTask, updateTask, editingTask }) {
     e.preventDefault();
 
     if (!form.title.trim() || !form.description.trim()) {
-      alert("Please fill all fields");
+      toast.error("Please fill all fields");
       return;
     }
 

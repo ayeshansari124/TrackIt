@@ -73,11 +73,11 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-blue-50 to-cyan-100 py-12 px-5">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-6xl font-black text-center text-slate-800">
-          Task Tracker
+          Task It
         </h1>
 
         <p className="text-center text-gray-600 mt-3 text-lg">
-          Organize your work like a pro.
+          Organize and track your work like a pro.
         </p>
 
         <div className="grid md:grid-cols-3 gap-6 mt-10">
@@ -108,7 +108,7 @@ function App() {
         <div className="bg-white rounded-2xl shadow-lg p-5 mb-8">
           <input
             type="text"
-            placeholder="🔍 Search tasks..."
+            placeholder=" Search tasks..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full border rounded-xl p-4 mb-5 outline-none focus:border-indigo-500"
@@ -133,7 +133,7 @@ function App() {
 
         {loading ? (
           <div className="text-center py-20 text-2xl font-semibold text-gray-600">
-            ⏳ Loading Tasks...
+             Loading Tasks...
           </div>
         ) : (
           <TaskList

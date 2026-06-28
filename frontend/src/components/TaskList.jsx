@@ -4,7 +4,6 @@ function TaskList({ tasks, deleteTask, setEditingTask }) {
   if (tasks.length === 0) {
     return (
       <div className="text-center mt-14">
-        <div className="text-7xl">📋</div>
 
         <h2 className="text-2xl font-bold text-gray-700 mt-4">No Tasks Yet</h2>
 
